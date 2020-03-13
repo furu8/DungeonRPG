@@ -9,7 +9,7 @@ public class TPCamera : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //unitychanをplayerに格納
-        player = GameObject.Find("unitychan");
+        player = GameObject.Find("Player");
 	}
 	
 	// Update is called once per frame

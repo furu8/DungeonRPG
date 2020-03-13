@@ -72,7 +72,7 @@ namespace UnityChan
 			float h = Input.GetAxis ("Horizontal");				// 入力デバイスの水平軸をhで定義
 			float v = Input.GetAxis ("Vertical");				// 入力デバイスの垂直軸をvで定義
 			anim.SetFloat ("Speed", v);							// Animator側で設定している"Speed"パラメタにvを渡す
-			anim.SetFloat ("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
+			anim.SetFloat ("Direction", h); 					// Animator側で設定している"Direction"パラメタにhを渡す
 			anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
 			currentBaseState = anim.GetCurrentAnimatorStateInfo (0);	// 参照用のステート変数にBase Layer (0)の現在のステートを設定する
 			rb.useGravity = true;//ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
@@ -87,13 +87,13 @@ namespace UnityChan
 			if (v > 0.1) {
 				velocity *= forwardSpeed;		// 移動速度を掛ける
 			} else if (v < -0.1) {
-				velocity *= backwardSpeed;	// 移動速度を掛ける
+				velocity *= forwardSpeed;	// 移動速度を掛ける
 			}
 		
 			if (Input.GetButtonDown ("Jump")) {	// スペースキーを入力したら
 
 				//アニメーションのステートがLocomotionの最中のみジャンプできる
-				if (currentBaseState.nameHash == locoState) {
+				if (currentBaseState.fullPathHash == locoState) {
 					//ステート遷移中でなかったらジャンプできる
 					if (!anim.IsInTransition (0)) {
 						rb.AddForce (Vector3.up * jumpPower, ForceMode.VelocityChange);
@@ -113,16 +113,16 @@ namespace UnityChan
 			// 以下、Animatorの各ステート中での処理
 			// Locomotion中
 			// 現在のベースレイヤーがlocoStateの時
-			if (currentBaseState.nameHash == locoState) {
+			if (currentBaseState.fullPathHash == locoState) {
 				//カーブでコライダ調整をしている時は、念のためにリセットする
 				if (useCurves) {
 					resetCollider ();
 				}
 			}
-		// JUMP中の処理
-		// 現在のベースレイヤーがjumpStateの時
-		else if (currentBaseState.nameHash == jumpState) {
-				cameraObject.SendMessage ("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
+			// JUMP中の処理
+			// 現在のベースレイヤーがjumpStateの時
+			else if (currentBaseState.fullPathHash == jumpState) {
+				// cameraObject.SendMessage ("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
 				// ステートがトランジション中でない場合
 				if (!anim.IsInTransition (0)) {
 				
@@ -155,9 +155,9 @@ namespace UnityChan
 					anim.SetBool ("Jump", false);
 				}
 			}
-		// IDLE中の処理
-		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState) {
+			// IDLE中の処理
+			// 現在のベースレイヤーがidleStateの時
+			else if (currentBaseState.fullPathHash == idleState) {
 				//カーブでコライダ調整をしている時は、念のためにリセットする
 				if (useCurves) {
 					resetCollider ();
@@ -167,10 +167,10 @@ namespace UnityChan
 					anim.SetBool ("Rest", true);
 				}
 			}
-		// REST中の処理
-		// 現在のベースレイヤーがrestStateの時
-		else if (currentBaseState.nameHash == restState) {
-				//cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
+			// REST中の処理
+			// 現在のベースレイヤーがrestStateの時
+			else if (currentBaseState.fullPathHash == restState) {
+				// cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
 				// ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
 				if (!anim.IsInTransition (0)) {
 					anim.SetBool ("Rest", false);
