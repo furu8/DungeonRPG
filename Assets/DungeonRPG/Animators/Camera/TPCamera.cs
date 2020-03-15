@@ -11,8 +11,8 @@ public class TPCamera : MonoBehaviour {
     public Vector3 offset; // offset form the target object
 
     [SerializeField] private float distance = 4.0f; // distance from following object
-    [SerializeField] private float polarAngle = 0f; // angle with y-axis
-    [SerializeField] private float azimuthalAngle = 0f; // angle with x-axis
+    [SerializeField] private float polarAngle = 45f; // angle with y-axis
+    [SerializeField] private float azimuthalAngle = 270f; // angle with x-axis
 
     [SerializeField] private float minDistance = 1.0f; // ホイールで近づける最小距離
     [SerializeField] private float maxDistance = 7.0f; // ホイールで遠ざける最大距離
