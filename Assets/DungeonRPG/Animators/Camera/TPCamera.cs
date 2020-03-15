@@ -1,7 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+// 属性
 [ExecuteInEditMode, DisallowMultipleComponent]
+// ExecuteInEditMode：コンポーネントのUpdateやStartといったイベントを、ゲームを再生しない状態でも動作。ランタイムで動作する挙動を確認する際に便利。
+// DisallowMultipleComponent：同一オブジェクトに複数のコンポーネントを追加不可にする。
+
 public class TPCamera : MonoBehaviour {
 
     public GameObject target; // an object to follow
@@ -35,15 +38,15 @@ public class TPCamera : MonoBehaviour {
         // スクロールで距離更新
         updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
-        // ターゲットの位置とオフセットの和を格納
+        // ターゲットの位置とオフセット(微調整用の変数)の和を格納
         var lookAtPos = target.transform.position + offset;
         // カメラの向きを更新
-        updatePosition(lookAtPos);
+        updateCameraPosition(lookAtPos);
         // 指定した方向にカメラを向かせる
         transform.LookAt(lookAtPos);
     }
 
-    // アングルを更新
+    // ターゲットに対するアングルを更新
     void updateAngle(float x, float y)
     {
         // 現在のX軸アングルから、マウスのX軸の移動距離を引いた値を格納
@@ -57,7 +60,7 @@ public class TPCamera : MonoBehaviour {
         polarAngle = Mathf.Clamp(y, minPolarAngle, maxPolarAngle);
     }
 
-    // キャラクターのまで距離を更新
+    // ターゲットのまで距離を更新
     void updateDistance(float scroll)
     {
         // 現在距離からマウスのスクロール距離を引いた値を格納
@@ -66,8 +69,8 @@ public class TPCamera : MonoBehaviour {
         distance = Mathf.Clamp(scroll, minDistance, maxDistance);
     }
 
-    // カメラの向きを更新
-    void updatePosition(Vector3 lookAtPos)
+    // ターゲットの位置からカメラの位置を計算
+    void updateCameraPosition(Vector3 lookAtPos)
     {
         // 角度をラジアンに変換
         var da = azimuthalAngle * Mathf.Deg2Rad;

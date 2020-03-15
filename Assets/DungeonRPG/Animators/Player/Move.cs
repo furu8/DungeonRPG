@@ -20,9 +20,6 @@ public class Move : MonoBehaviour
     // 回転速度
     [SerializeField]
     private float rotateSpeed = 1f;
-    // 視点の上下スピード
-    [SerializeField]
-    private float camRotSpeed = 5f;    
 
     private float h, v;
     private float mX, mY;
@@ -43,15 +40,6 @@ public class Move : MonoBehaviour
         mX = Input.GetAxis ("Mouse X");      //マウスの左右移動量(-1.0~1.0)
         mY = Input.GetAxis ("Mouse Y");      //マウスの上下移動量(-1.0~1.0)
 
-        // カメラのみ上下に回転させる，180-140=60より上下60度まで見ることができる
-        // vlookAngle = Camera.main.transform.eulerAngles.z - 180 + camRotSpeed * mX;
-        // hlookAngle = Camera.main.transform.eulerAngles.x - 180 + camRotSpeed * mY;
-        // if (Mathf.Abs (hlookAngle) > 140) {
-        //     Camera.main.transform.Rotate (new Vector3 (camRotSpeed * mY, 0, 0));
-        // }
-        // Camera.main.transform.Rotate (new Vector3 (0, camRotSpeed * mX, 0));
-            
-
         // 接地しているかどうか
         if (characterController.isGrounded) {
             // 速度を0に
@@ -66,7 +54,6 @@ public class Move : MonoBehaviour
                 
                 // 左右矢印キーの値だけ回転
                 gameObject.transform.Rotate (new Vector3 (0, rotateSpeed * h, 0));
-                // transform.LookAt(transform.position + dir); < 後に使えるかもしれない
 
                 // アニメーションパラメータのSpeedの値にinput.magnitudeの値を渡す
                 animator.SetBool("Jump", false);
