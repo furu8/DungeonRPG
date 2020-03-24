@@ -5,7 +5,7 @@
 // ExecuteInEditMode：コンポーネントのUpdateやStartといったイベントを、ゲームを再生しない状態でも動作。ランタイムで動作する挙動を確認する際に便利。
 // DisallowMultipleComponent：同一オブジェクトに複数のコンポーネントを追加不可にする。
 
-public class TPCamera : MonoBehaviour {
+public class PlayerTPCamera : MonoBehaviour {
 
     public GameObject target; // an object to follow
     public Vector3 offset; // offset form the target object
