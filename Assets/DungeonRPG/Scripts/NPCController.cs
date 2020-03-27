@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCMoveContoller : MonoBehaviour
+public class NPCController : MonoBehaviour
 {
     // NPCの列挙体
     public enum State
     {
         Wait,
-        Walk
+        Walk,
+        Talk
     }
 
     //　目的地
@@ -30,7 +31,12 @@ public class NPCMoveContoller : MonoBehaviour
     private float elapsedTime;
     //　待機する時間
     [SerializeField] private float waitTime = 5f;
-
+    //　会話内容保持スクリプト
+    [SerializeField] private Conversation conversation = null;
+    //　ユニティちゃんのTransform
+    private Transform conversationPartnerTransform;
+    //　村人がユニティちゃんの方向に回転するスピード
+    [SerializeField] private float rotationSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,11 +71,20 @@ public class NPCMoveContoller : MonoBehaviour
             if (elapsedTime > waitTime) {
                 SetState(State.Walk);
             }
+        } else if(state == State.Talk) {
+            //　村人がユニティちゃんの方向をある程度向くまで回転させる
+            // ユニティちゃんの位置から村人の位置を引いてユニティちゃんの方向を求めたものと村人の前方の角度をVector3.Angleで求め、5度より大きい時は村人をユニティちゃんの方向に向かせる。
+            if (Vector3.Angle(transform.forward, new Vector3(conversationPartnerTransform.position.x, transform.position.y, conversationPartnerTransform.position.z) - transform.position) > 5f) {
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(conversationPartnerTransform.position.x, transform.position.y, conversationPartnerTransform.position.z) - transform.position), rotationSpeed * Time.deltaTime);
+                animator.SetFloat("Speed", 1f);
+            } else {
+                animator.SetFloat("Speed", 0f);
+            }
         }
     }
 
     //　村人の状態変更
-    public void SetState(State state) {
+    public void SetState(State state, Transform conversationPartnerTransform = null) {
         this.state = state;
         if (state == State.Wait) {
             elapsedTime = 0f;
@@ -77,7 +92,17 @@ public class NPCMoveContoller : MonoBehaviour
         } else if(state == State.Walk) {
             SetNextPosition(patrolPositions[nowPatrolPosition].position);
             navMeshAgent.SetDestination(GetDestination());
+            navMeshAgent.isStopped = false;
+        } else if(state == State.Talk) {
+            navMeshAgent.isStopped = true;
+            animator.SetFloat("Speed", 0f);
+            this.conversationPartnerTransform = conversationPartnerTransform;
         }
+    }
+
+    //　Conversionスクリプトを返す
+    public Conversation GetConversation() {
+        return conversation;
     }
  
     //　巡回地点を順に目的地として設定する

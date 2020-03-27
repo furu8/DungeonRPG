@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
  
-public class UnityChanTalkScript : MonoBehaviour
+public class PlayerTalkDirector : MonoBehaviour
 {
     //　会話可能な相手
     private GameObject conversationPartner;
@@ -129,9 +129,9 @@ public class UnityChanTalkScript : MonoBehaviour
  
     //　会話を開始する
     public void StartTalking() {
-        var NPCMoveContoller = conversationPartner.GetComponent<NPCMoveContoller>();
-        NPCMoveContoller.SetState(NPCMoveContoller.State.Talk, transform);
-        this.allMessage = NPCMoveContoller.GetConversation().GetConversationMessage();
+        var NPCController = conversationPartner.GetComponent<NPCController>();
+        NPCController.SetState(NPCController.State.Talk, transform);
+        this.allMessage = NPCController.GetConversation().GetConversationMessage();
         //　分割文字列で一回に表示するメッセージを分割する
         splitMessage = Regex.Split(allMessage, @"\s*" + splitString + @"\s*", RegexOptions.IgnorePatternWhitespace);
         //　初期化処理
@@ -145,14 +145,15 @@ public class UnityChanTalkScript : MonoBehaviour
         //　会話開始時の入力は一旦リセット
         Input.ResetInputAxes();
     }
+
     //　会話を終了する
     void EndTalking() {
         isEndMessage = true;
         talkUI.SetActive(false);
         //　ユニティちゃんと村人両方の状態を変更する
-        var NPCMoveContoller = conversationPartner.GetComponent<NPCMoveContoller>();
-        NPCMoveContoller.SetState(NPCMoveContoller.State.Wait);
-        GetComponent<PlayerTalkStateController>().SetState(PlayerTalkStateController.State.Normal);
+        var NPCController = conversationPartner.GetComponent<NPCController>();
+        NPCController.SetState(NPCController.State.Wait);
+        GetComponent<PlayerController>().SetState(PlayerController.State.Normal);
         Input.ResetInputAxes();
     }
 
