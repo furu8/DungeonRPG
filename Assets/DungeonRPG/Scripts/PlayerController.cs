@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Jump", false);
                     animator.SetFloat("Speed", 0f);
                 }
-                if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Jump")) {
+                if (playerTalkDirector.GetConversationPartner() != null && Input.GetMouseButton(0)) {
                     SetState(State.Talk);
                 }
             }

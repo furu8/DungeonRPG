@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,14 +43,15 @@ public class PlayerTalkDirector : MonoBehaviour
     void Start() {
         clickIcon.enabled = false;
         messageText = talkUI.GetComponentInChildren<Text>();
+        
     }
- 
+    
     void Update() {
         //　メッセージが終わっているか、メッセージがない場合はこれ以降何もしない
         if (isEndMessage || allMessage == null) {
             return;
         }
- 
+        
         //　1回に表示するメッセージを表示していない	
         if (!isOneMessage) {
             //　テキスト表示時間を経過したらメッセージを追加
@@ -65,7 +68,7 @@ public class PlayerTalkDirector : MonoBehaviour
             elapsedTime += Time.deltaTime;
  
             //　メッセージ表示中にマウスの左ボタンを押したら一括表示
-            if (Input.GetButtonDown("Jump")) {
+            if (Input.GetMouseButton(0)) {
                 //　ここまでに表示しているテキストに残りのメッセージを足す
                 messageText.text += splitMessage[messageNum].Substring(nowTextNum);
                 isOneMessage = true;
@@ -81,7 +84,7 @@ public class PlayerTalkDirector : MonoBehaviour
             }
  
             //　マウスクリックされたら次の文字表示処理
-            if (Input.GetButtonDown("Jump")) {
+            if (Input.GetMouseButton(0)) {
                 nowTextNum = 0;
                 messageNum++;
                 messageText.text = "";
@@ -132,8 +135,10 @@ public class PlayerTalkDirector : MonoBehaviour
         var NPCController = conversationPartner.GetComponent<NPCController>();
         NPCController.SetState(NPCController.State.Talk, transform);
         this.allMessage = NPCController.GetConversation().GetConversationMessage();
+        Debug.Log(this.allMessage);
         //　分割文字列で一回に表示するメッセージを分割する
-        splitMessage = Regex.Split(allMessage, @"\s*" + splitString + @"\s*", RegexOptions.IgnorePatternWhitespace);
+        splitMessage = Regex.Split(allMessage, @"\s*" + splitString + @"\s*" , RegexOptions.IgnorePatternWhitespace);
+        Debug.Log(this.splitMessage);
         //　初期化処理
         nowTextNum = 0;
         messageNum = 0;
@@ -146,8 +151,14 @@ public class PlayerTalkDirector : MonoBehaviour
         Input.ResetInputAxes();
     }
 
+    private string LoadConversation() {
+        // データ読み込み。
+        string NPC1Conversation = File.ReadAllText("conversation.txt", Encoding.GetEncoding("utf-8")); 
+        return NPC1Conversation;
+    }
+
     //　会話を終了する
-    void EndTalking() {
+    private void EndTalking() {
         isEndMessage = true;
         talkUI.SetActive(false);
         //　ユニティちゃんと村人両方の状態を変更する
