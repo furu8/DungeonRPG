@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCMove : MonoBehaviour
+public class NPCMoveContoller : MonoBehaviour
 {
     // NPCの列挙体
     public enum State
