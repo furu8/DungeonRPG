@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -43,7 +42,6 @@ public class PlayerTalkDirector : MonoBehaviour
     void Start() {
         clickIcon.enabled = false;
         messageText = talkUI.GetComponentInChildren<Text>();
-        
     }
     
     void Update() {
@@ -57,6 +55,8 @@ public class PlayerTalkDirector : MonoBehaviour
             //　テキスト表示時間を経過したらメッセージを追加
             if (elapsedTime >= textSpeed) {
                 messageText.text += splitMessage[messageNum][nowTextNum];
+                // Debug.Log(messageText.text);
+
                 nowTextNum++;
                 elapsedTime = 0f;
  
@@ -68,12 +68,12 @@ public class PlayerTalkDirector : MonoBehaviour
             elapsedTime += Time.deltaTime;
  
             //　メッセージ表示中にマウスの左ボタンを押したら一括表示
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButtonDown(0)) {
                 //　ここまでに表示しているテキストに残りのメッセージを足す
                 messageText.text += splitMessage[messageNum].Substring(nowTextNum);
                 isOneMessage = true;
             }
-            //　1回に表示するメッセージを表示した
+        //　1回に表示するメッセージを表示した
         } else {
             elapsedTime += Time.deltaTime;
  
@@ -84,7 +84,7 @@ public class PlayerTalkDirector : MonoBehaviour
             }
  
             //　マウスクリックされたら次の文字表示処理
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButtonDown(0)) {
                 nowTextNum = 0;
                 messageNum++;
                 messageText.text = "";
@@ -93,13 +93,21 @@ public class PlayerTalkDirector : MonoBehaviour
                 isOneMessage = false;
  
                 //　メッセージが全部表示されていたらゲームオブジェクト自体の削除
+                // Debug.Log(messageNum);
                 if (messageNum >= splitMessage.Length) {
                     EndTalking();
                 }
+                StartCoroutine(sleep());
             }
         }
     }
  
+    IEnumerator sleep() {
+        Debug.Log("開始");
+        yield return new WaitForSeconds(5);
+        Debug.Log("終了");
+
+    }
     private void LateUpdate() {
         //　会話相手がいる場合はTalkIconの位置を会話相手の頭上に表示
         if (conversationPartner != null) {
@@ -135,10 +143,8 @@ public class PlayerTalkDirector : MonoBehaviour
         var NPCController = conversationPartner.GetComponent<NPCController>();
         NPCController.SetState(NPCController.State.Talk, transform);
         this.allMessage = NPCController.GetConversation().GetConversationMessage();
-        Debug.Log(this.allMessage);
         //　分割文字列で一回に表示するメッセージを分割する
         splitMessage = Regex.Split(allMessage, @"\s*" + splitString + @"\s*" , RegexOptions.IgnorePatternWhitespace);
-        Debug.Log(this.splitMessage);
         //　初期化処理
         nowTextNum = 0;
         messageNum = 0;
