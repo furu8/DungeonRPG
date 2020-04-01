@@ -55,7 +55,6 @@ public class PlayerTalkDirector : MonoBehaviour
             //　テキスト表示時間を経過したらメッセージを追加
             if (elapsedTime >= textSpeed) {
                 messageText.text += splitMessage[messageNum][nowTextNum];
-                // Debug.Log(messageText.text);
 
                 nowTextNum++;
                 elapsedTime = 0f;
@@ -93,21 +92,13 @@ public class PlayerTalkDirector : MonoBehaviour
                 isOneMessage = false;
  
                 //　メッセージが全部表示されていたらゲームオブジェクト自体の削除
-                // Debug.Log(messageNum);
                 if (messageNum >= splitMessage.Length) {
                     EndTalking();
                 }
-                StartCoroutine(sleep());
             }
         }
     }
  
-    IEnumerator sleep() {
-        Debug.Log("開始");
-        yield return new WaitForSeconds(5);
-        Debug.Log("終了");
-
-    }
     private void LateUpdate() {
         //　会話相手がいる場合はTalkIconの位置を会話相手の頭上に表示
         if (conversationPartner != null) {
