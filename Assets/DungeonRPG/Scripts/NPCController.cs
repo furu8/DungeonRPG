@@ -33,8 +33,10 @@ public class NPCController : MonoBehaviour
     private float elapsedTime;
     //　待機する時間
     [SerializeField] private float waitTime = 5f;
-    //　会話内容保持スクリプト
-    private string conversation = null;
+    //　会話内容テキストファイルメンバ変数
+    [SerializeField] private TextAsset conversation = null;
+    // 会話文内容
+    private string ConversationText;
     //　ユニティちゃんのTransform
     private Transform conversationPartnerTransform;
     //　村人がユニティちゃんの方向に回転するスピード
@@ -45,6 +47,9 @@ public class NPCController : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
+        // テキスト読み込み
+        StringReader stackLevelCostReader = new StringReader(conversation.text);
+        ConversationText = stackLevelCostReader.ReadToEnd();
         //　巡回地点を設定
         patrolPositions = new Transform[patrolPointsParent.transform.childCount];
         for (int i = 0; i < patrolPointsParent.transform.childCount; i++) {
@@ -104,16 +109,16 @@ public class NPCController : MonoBehaviour
 
     //　Conversionスクリプトを返す
     public string GetConversation() {
-        conversation = LoadConversation();
-        return conversation;
+        // conversation = LoadConversation();
+        return ConversationText;
     }
 
     // 会話文を取得
-    private string LoadConversation() {
-        // データ読み込み。
-        string NPCConversation = File.ReadAllText("Assets/DungeonRPG/Conversation/conversation.txt", Encoding.GetEncoding("utf-8")); 
-        return NPCConversation;
-    }
+    // private string LoadConversation() {
+    //     // データ読み込み。
+    //     string NPCConversation = File.ReadAllText("Assets/DungeonRPG/Conversation/conversation.txt", Encoding.GetEncoding("utf-8")); 
+    //     return NPCConversation;
+    // }
  
     //　巡回地点を順に目的地として設定する
     public void SetNextPosition(Vector3 position) {
