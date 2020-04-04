@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Text;
-using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -133,7 +131,8 @@ public class PlayerTalkDirector : MonoBehaviour
     public void StartTalking() {
         var NPCController = conversationPartner.GetComponent<NPCController>();
         NPCController.SetState(NPCController.State.Talk, transform);
-        this.allMessage = NPCController.GetConversation().GetConversationMessage();
+        // this.allMessage = NPCController.GetConversation().GetConversationMessage(); // Unity内に会話文を持つ
+        this.allMessage = NPCController.GetConversation();                          // ファイルに会話文を持つ 
         //　分割文字列で一回に表示するメッセージを分割する
         splitMessage = Regex.Split(allMessage, @"\s*" + splitString + @"\s*" , RegexOptions.IgnorePatternWhitespace);
         //　初期化処理
@@ -148,11 +147,6 @@ public class PlayerTalkDirector : MonoBehaviour
         Input.ResetInputAxes();
     }
 
-    private string LoadConversation() {
-        // データ読み込み。
-        string NPC1Conversation = File.ReadAllText("conversation.txt", Encoding.GetEncoding("utf-8")); 
-        return NPC1Conversation;
-    }
 
     //　会話を終了する
     private void EndTalking() {

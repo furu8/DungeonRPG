@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,7 +34,7 @@ public class NPCController : MonoBehaviour
     //　待機する時間
     [SerializeField] private float waitTime = 5f;
     //　会話内容保持スクリプト
-    [SerializeField] private Conversation conversation = null;
+    private string conversation = null;
     //　ユニティちゃんのTransform
     private Transform conversationPartnerTransform;
     //　村人がユニティちゃんの方向に回転するスピード
@@ -101,8 +103,16 @@ public class NPCController : MonoBehaviour
     }
 
     //　Conversionスクリプトを返す
-    public Conversation GetConversation() {
+    public string GetConversation() {
+        conversation = LoadConversation();
         return conversation;
+    }
+
+    // 会話文を取得
+    private string LoadConversation() {
+        // データ読み込み。
+        string NPCConversation = File.ReadAllText("Assets/DungeonRPG/Conversation/conversation.txt", Encoding.GetEncoding("utf-8")); 
+        return NPCConversation;
     }
  
     //　巡回地点を順に目的地として設定する
