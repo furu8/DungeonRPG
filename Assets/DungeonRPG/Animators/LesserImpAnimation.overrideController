@@ -7,5 +7,5 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LesserImpAnimation
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f204b638b0fef7049b34cc1ac681d14e, type: 2}
   m_Clips: []
