@@ -11,8 +11,8 @@ public class SceneMovementData : ScriptableObject
     // シーンの遷移の列挙体
     public enum SceneType {
         StartGame,
-        FirstVillage,
-        FirstVillageToWorldMap
+        Orario,
+        OrarioToDungeon
     }
     [SerializeField]
     private SceneType sceneType;
@@ -21,7 +21,7 @@ public class SceneMovementData : ScriptableObject
     public void OnEnable() {
         sceneType = SceneType.StartGame;
     }
-    
+
     // シーンタイプを設定
     public void SetSceneType(SceneType scene) {
         sceneType = scene;
