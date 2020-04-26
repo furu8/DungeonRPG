@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
- 
+using static System.Net.Mime.MediaTypeNames;
+
 public class LoadSceneManager : MonoBehaviour
 {
     public static LoadSceneManager loadSceneManager;
