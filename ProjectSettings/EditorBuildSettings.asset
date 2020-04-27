@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/DungeonRPG/Scenes/OrarioMap.unity
+    guid: 5ea12788d5783cf4f9396ceeb8ca2096
+  - enabled: 1
+    path: Assets/DungeonRPG/Scenes/DungeonMap18.unity
+    guid: b7df0ffde16897f49b412ea75f7eed4c
   m_configObjects: {}
