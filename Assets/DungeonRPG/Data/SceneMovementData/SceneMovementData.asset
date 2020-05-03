@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6be293639d27a2942854c5df50caf2f1, type: 3}
   m_Name: SceneMovementData
   m_EditorClassIdentifier: 
-  sceneType: 0
+  sceneType: 2
