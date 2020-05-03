@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        state = State.Wait;
+        state = State.Normal;
+        // state = State.Wait;
         playerTalkDirector = GetComponent<PlayerTalkDirector>();
     }
  
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
         v = Input.GetAxis ("Vertical");      //上下矢印キーの値(-1.0~1.0)
         mX = Input.GetAxis ("Mouse X");      //マウスの左右移動量(-1.0~1.0)
         mY = Input.GetAxis ("Mouse Y");      //マウスの上下移動量(-1.0~1.0)
-
+        
         if (state == State.Normal) {
             // 接地しているかどうか
             if (characterController.isGrounded) {
@@ -94,27 +95,35 @@ public class PlayerController : MonoBehaviour
         } else if (state == State.Talk) {
             // 何もしない
 
-        } else if (state == State.Wait) {
-            // 会話相手が見つかったときに、マウス左クリックをしたら会話状態に遷移
-            if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Jump")) {
-                SetState(State.Talk);
-            }
-        }
-
+        } 
+        // else if (state == State.Wait) {
+        //     // 会話相手が見つかったときに、マウス左クリックをしたら会話状態に遷移
+        //     if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Jump")) {
+        //         SetState(State.Talk);
+        //     }
+        // }
+        
+        // 重力
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+        // characterControllerのMoveメソッドの引数に速度を渡してキャラクターを移動させる
+        characterController.Move(velocity * Time.deltaTime);
+        
         // -- シーン遷移時のデフォルト位置問題対処（シーン中に移動させない）
-        // Wait以外のときに重力を反映させる
-        if (state != State.Wait) {
-            // 重力
-            velocity.y += Physics.gravity.y * Time.deltaTime;
-            // characterControllerのMoveメソッドの引数に速度を渡してキャラクターを移動させる
-            characterController.Move(velocity * Time.deltaTime);
-        // Waitのとき
-        } else {
-            // 横軸の入力と縦軸の入力どちらの入力も0じゃないときNormalに遷移
-            if (!Mathf.Approximately(Input.GetAxis("Horizontal"), 0f)  || !Mathf.Approximately(Input.GetAxis("Vertical"), 0f)) {
-                SetState(State.Normal);
-            }
-        }
+        // Wait以外のときに重力処理と移動処理を反映させる
+        // if (state != State.Wait) {
+        //     // 重力
+        //     velocity.y += Physics.gravity.y * Time.deltaTime;
+        //     // characterControllerのMoveメソッドの引数に速度を渡してキャラクターを移動させる
+        //     characterController.Move(velocity * Time.deltaTime);
+        // // Waitのとき
+        // } else {
+        //     characterController.Move(velocity * Time.deltaTime);
+
+        //     // 横軸の入力と縦軸の入力どちらの入力も0じゃないときNormalに遷移
+        //     if (!Mathf.Approximately(Input.GetAxis("Horizontal"), 0f)  || !Mathf.Approximately(Input.GetAxis("Vertical"), 0f)) {
+        //         SetState(State.Normal);
+        //     }
+        // }
     }
 
     //　状態変更と初期設定

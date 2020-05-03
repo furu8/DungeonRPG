@@ -17,6 +17,7 @@ public class LoadSceneManager : MonoBehaviour
     private GameObject fadeInstance;
     //　フェードの画像
     private Image fadeImage;
+    
     [SerializeField]
     private float fadeSpeed = 5f;
  
@@ -31,7 +32,9 @@ public class LoadSceneManager : MonoBehaviour
     }
     //　次のシーンを呼び出す
     public void GoToNextScene(SceneMovementData.SceneType scene) {
+        // そのシーンのキャラクター座標を設定
         sceneMovementData.SetSceneType(scene);
+        // コルーチン開始
         StartCoroutine(FadeAndLoadScene(scene));
     }
     //　フェードをした後にシーン読み込み
@@ -73,8 +76,10 @@ public class LoadSceneManager : MonoBehaviour
     IEnumerator LoadScene(string sceneName) {
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
  
+        // シーンが完了するまで1フレーム待つを繰り返す
         while (!async.isDone) {
             yield return null;
         }
+        
     }
 }

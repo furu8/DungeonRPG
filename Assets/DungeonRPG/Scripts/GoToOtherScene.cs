@@ -17,7 +17,7 @@ public class GoToOtherScene : MonoBehaviour
  
     private void OnTriggerEnter(Collider col) {
         //　次のシーンへ遷移途中でない時
-        if(col.tag == "Player" && !isTransition) {
+        if (col.tag == "Player" && !isTransition) {
             isTransition = true;
             sceneManager.GoToNextScene(scene);
         }    
