@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Jump", false);
                     animator.SetFloat("Speed", dir.magnitude);
                     
-                    if (Input.GetButton("Jump")) {
+                    if (Input.GetButtonDown("Action")) {
                         dir.y = jumpSpeed;
                         animator.SetBool("Jump", true);
                     }
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetFloat("Speed", 0f);
                 }
                 // 会話相手が見つかったときに、マウス左クリックをしたら会話状態に遷移
-                if (playerTalkDirector.GetConversationPartner() != null && Input.GetMouseButton(0)) {
+                if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Action")) {
                     SetState(State.Talk);
                 }
             }
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         } 
         // else if (state == State.Wait) {
         //     // 会話相手が見つかったときに、マウス左クリックをしたら会話状態に遷移
-        //     if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Jump")) {
+        //     if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Action")) {
         //         SetState(State.Talk);
         //     }
         // }
