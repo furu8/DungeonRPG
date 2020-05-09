@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
     private PlayerTalkDirector playerTalkDirector;
 
     private float h, v;
-    private float mX, mY;
-    private float hlookAngle, vlookAngle;
  
     // Start is called before the first frame update
     void Start()
@@ -47,10 +45,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxis("Horizontal");     //左右矢印キーの値(-1.0~1.0)
-        v = Input.GetAxis ("Vertical");      //上下矢印キーの値(-1.0~1.0)
-        mX = Input.GetAxis ("Mouse X");      //マウスの左右移動量(-1.0~1.0)
-        mY = Input.GetAxis ("Mouse Y");      //マウスの上下移動量(-1.0~1.0)
+        h = Input.GetAxis("LeftHorizontal");     //左右矢印キーの値(-1.0~1.0)
+        v = Input.GetAxis ("LeftVertical");      //上下矢印キーの値(-1.0~1.0)
         
         if (state == State.Normal) {
             // 接地しているかどうか
