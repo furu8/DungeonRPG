@@ -61,7 +61,8 @@ public class GenerateMonster : MonoBehaviour {
  
 			//　インスタンス化が成功したかどうか？
 			bool check = false;
-			RaycastHit hit;
+			RaycastHit rayhit;
+			RaycastHit shrhit;
  
 			//　ランダム値を入れる変数
 			float randX;
@@ -76,20 +77,10 @@ public class GenerateMonster : MonoBehaviour {
 				randZ = Random.Range (Ground18.GetPosition ().z, Ground18.GetPosition ().z + Ground18.terrainData.size.z);
 				
 				//　Terrainと接触した位置を探す
-				if(Physics.Raycast(new Vector3(randX, Ground18.GetPosition ().y + Ground18.terrainData.size.y, randZ), Vector3.down, out hit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask("Field"))) {
-					// Debug.Log(randX);
-					// Debug.Log(Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f);
-					// Debug.Log(randZ);
-					// Debug.Log(hit.point);
-					// Debug.Log("\n");
+				if(Physics.Raycast(new Vector3(randX, Ground18.GetPosition ().y + Ground18.terrainData.size.y, randZ), Vector3.down, out rayhit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask("Field"))) {
 					//　Player、Monsterという名前のレイヤーと接触してなければ地面の接触ポイントに敵を配置
-					if (!Physics.SphereCast(new Vector3(randX, Ground18.GetPosition().y + Ground18.terrainData.size.y, randZ), radius, Vector3.down, out hit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask("Player", "Monster"))) {
-						Debug.Log(randX);
-						Debug.Log(Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f);
-						Debug.Log(randZ);
-						Debug.Log(hit.point);
-						Debug.Log("\n");
-						GameObject tempObj = Instantiate(monsters[Random.Range(0, monsters.Length)], hit.point, Quaternion.identity) as GameObject;
+					if (!Physics.SphereCast(new Vector3(randX, Ground18.GetPosition().y + Ground18.terrainData.size.y, randZ), radius, Vector3.down, out shrhit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask("Player", "Monster"))) {
+						GameObject tempObj = Instantiate(monsters[Random.Range(0, monsters.Length)], rayhit.point, Quaternion.identity) as GameObject;
 						tempObj.transform.SetParent(parentObj.transform);
 						check = true;
 					} else {
