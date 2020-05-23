@@ -76,14 +76,19 @@ public class GenerateMonster : MonoBehaviour {
 				randZ = Random.Range (Ground18.GetPosition ().z, Ground18.GetPosition ().z + Ground18.terrainData.size.z);
 				
 				//　Terrainと接触した位置を探す
-				if(Physics.Raycast (new Vector3(randX, Ground18.GetPosition ().y + Ground18.terrainData.size.y, randZ), Vector3.down, out hit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask ("Field"))) {
-					Debug.Log(randX);
-					Debug.Log(Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f);
-					Debug.Log(randZ);
-					Debug.Log(hit.point);
-					Debug.Log("\n");
+				if(Physics.Raycast(new Vector3(randX, Ground18.GetPosition ().y + Ground18.terrainData.size.y, randZ), Vector3.down, out hit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask("Field"))) {
+					// Debug.Log(randX);
+					// Debug.Log(Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f);
+					// Debug.Log(randZ);
+					// Debug.Log(hit.point);
+					// Debug.Log("\n");
 					//　Player、Monsterという名前のレイヤーと接触してなければ地面の接触ポイントに敵を配置
-					if (!Physics.SphereCast (new Vector3(randX, Ground18.GetPosition().y + Ground18.terrainData.size.y, randZ), radius, Vector3.down, out hit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask ("Player", "Monster"))) {
+					if (!Physics.SphereCast(new Vector3(randX, Ground18.GetPosition().y + Ground18.terrainData.size.y, randZ), radius, Vector3.down, out hit, Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f, LayerMask.GetMask("Player", "Monster"))) {
+						Debug.Log(randX);
+						Debug.Log(Ground18.GetPosition ().y + Ground18.terrainData.size.y + 100f);
+						Debug.Log(randZ);
+						Debug.Log(hit.point);
+						Debug.Log("\n");
 						GameObject tempObj = Instantiate(monsters[Random.Range(0, monsters.Length)], hit.point, Quaternion.identity) as GameObject;
 						tempObj.transform.SetParent(parentObj.transform);
 						check = true;
