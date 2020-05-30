@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        h = Input.GetAxis("LeftHorizontal");     //左右矢印キーの値(-1.0~1.0)
-        v = Input.GetAxis ("LeftVertical");      //上下矢印キーの値(-1.0~1.0)
+        h = Input.GetAxis("Horizontal"); //左右矢印キーの値(-1.0~1.0)
+        v = Input.GetAxis("Vertical");   //上下矢印キーの値(-1.0~1.0)
         
         if (state == State.Normal) {
             // 接地しているかどうか
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetFloat("Speed", 0f);
                 }
                 // 会話相手が見つかったときに、マウス左クリックをしたら会話状態に遷移
-                if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Action")) {
+                if (playerTalkDirector.GetConversationPartner() != null && (Input.GetButtonDown("Action") || Input.GetMouseButtonDown(0))) {
                     SetState(State.Talk);
                 }
             }

@@ -65,7 +65,7 @@ public class PlayerTalkDirector : MonoBehaviour
             elapsedTime += Time.deltaTime;
  
             //　メッセージ表示中にマウスの左ボタンを押したら一括表示
-            if (Input.GetButtonDown("Action")) {
+            if (Input.GetButtonDown("Action") || Input.GetMouseButtonDown(0)) {
                 //　ここまでに表示しているテキストに残りのメッセージを足す
                 messageText.text += splitMessage[messageNum].Substring(nowTextNum);
                 isOneMessage = true;
@@ -81,7 +81,7 @@ public class PlayerTalkDirector : MonoBehaviour
             }
  
             //　マウスクリックされたら次の文字表示処理
-            if (Input.GetButtonDown("Action")) {
+            if (Input.GetButtonDown("Action") || Input.GetMouseButtonDown(0)) {
                 nowTextNum = 0;
                 messageNum++;
                 messageText.text = "";

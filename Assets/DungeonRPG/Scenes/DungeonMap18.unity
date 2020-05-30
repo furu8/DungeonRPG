@@ -5000,12 +5000,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ground18: {fileID: 125213825}
-  maxNum: 5
+  maxNum: 100
   monsters:
   - {fileID: 5420386332440613830, guid: 9d0b811dc2700764ca9aee18ddfe9f4a, type: 3}
   - {fileID: 4579550764910790042, guid: fe7e86f03ecbe0f4995fc0bdcac319e1, type: 3}
   - {fileID: 8449248662742335608, guid: a99e089c4fd6cea4abb6841c1f6df5f5, type: 3}
-  radius: 5
+  radius: 2
 --- !u!4 &1230012251
 Transform:
   m_ObjectHideFlags: 0
