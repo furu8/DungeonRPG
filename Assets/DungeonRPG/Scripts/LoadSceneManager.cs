@@ -20,6 +20,9 @@ public class LoadSceneManager : MonoBehaviour
     
     [SerializeField]
     private float fadeSpeed = 5f;
+
+    // シーン遷移中かどうか
+    private bool isTransition;
  
     private void Awake() {
         // LoadSceneMangerは常に一つだけにする
@@ -32,6 +35,7 @@ public class LoadSceneManager : MonoBehaviour
     }
     //　次のシーンを呼び出す
     public void GoToNextScene(SceneMovementData.SceneType scene) {
+        isTransition = true;
         // そのシーンのキャラクター座標を設定
         sceneMovementData.SetSceneType(scene);
         // コルーチン開始
@@ -82,6 +86,9 @@ public class LoadSceneManager : MonoBehaviour
         while (!async.isDone) {
             yield return null;
         }
-        
+    }
+
+    public bool IsTransition() {
+        return isTransition;
     }
 }

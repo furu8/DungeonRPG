@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     {
         Normal,
         Talk,
-        Wait
+        Wait,
+        Command
     }
     // キャラクターコントローラー
     private CharacterController characterController;

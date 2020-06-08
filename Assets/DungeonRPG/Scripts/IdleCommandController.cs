@@ -21,9 +21,9 @@ public class IdleCommandScript : MonoBehaviour {
     private GameObject characterStatusPanel;
     //　SceneManager
     private LoadSceneManager sceneManager = null;
-    //　UnityChanScript
+    //　player
     [SerializeField]
-    private UnityChanScript unityChanScript = null;
+    private PlayerController player = null;
  
     private void Awake() {
         characterStatusPanel = transform.Find("CharacterStatusPanel").gameObject;
@@ -36,8 +36,8 @@ public class IdleCommandScript : MonoBehaviour {
     void Update() {
         //　シーン遷移途中とユニティちゃんの状態によっては表示しない
         if (sceneManager.IsTransition()
-            || unityChanScript.GetState() == UnityChanScript.State.Talk 
-            || unityChanScript.GetState() == UnityChanScript.State.Command
+            || player.GetState() == PlayerController.State.Talk 
+            || player.GetState() == PlayerController.State.Command
             ) {
             elapsedTime = 0f;
             characterStatusPanel.SetActive(false);
