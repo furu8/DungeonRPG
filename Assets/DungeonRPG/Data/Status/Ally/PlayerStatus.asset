@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: PlayerStatus
   m_EditorClassIdentifier: Assembly-CSharp::AllyStatus
-  characterName: 
+  characterName: "\u30E6\u30CB\u30C6\u30A3"
   level: 1
   maxHp: 100
   hp: 100

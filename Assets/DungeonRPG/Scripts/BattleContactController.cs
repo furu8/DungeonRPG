@@ -28,7 +28,7 @@
 // 			battleParam.pos = col.transform.position;
 // 			battleParam.rot = col.transform.rotation;
 // 			//　戦闘シーンの読み込み
-// 			loadSceneManager.FadeAndLoadScene ("Battle");
+// 			loadSceneManager.FadeAndLoadScene("Battle");
 // 		}
 // 	}
 // }

@@ -1206,6 +1206,7 @@ GameObject:
   - component: {fileID: 8449248662732887090}
   - component: {fileID: 8449248662738860262}
   - component: {fileID: 8449248662745440070}
+  - component: {fileID: -2426004807549679768}
   m_Layer: 9
   m_Name: wolf_02_Mecanim
   m_TagString: Untagged
@@ -1222,7 +1223,7 @@ Transform:
   m_GameObject: {fileID: 8449248662742335608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 246.19449, y: 0, z: 277.59958}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 8449248662742504538}
   - {fileID: 8449248662742504454}
@@ -1279,6 +1280,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-2426004807549679768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449248662742335608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205c238859f8dd34a827f40ac1350dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 3
 --- !u!1 &8449248662742335610
 GameObject:
   m_ObjectHideFlags: 0

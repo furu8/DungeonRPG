@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a42258a4543476d4c83fbf4f384d508e, type: 3}
-  m_Name: TrollStatus 2
+  m_Name: TrollStatus
   m_EditorClassIdentifier: 
-  characterName: 
+  characterName: "\u30C8\u30ED\u30FC\u30EB"
   level: 1
   maxHp: 100
   hp: 100
