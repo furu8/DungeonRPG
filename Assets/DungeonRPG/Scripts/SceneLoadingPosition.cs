@@ -22,6 +22,11 @@ public class SceneLoadingPosition : MonoBehaviour {
             var initialPosition = GameObject.Find("InitialPositionOrarioToDungeon").transform;
             transform.position = initialPosition.position;
             transform.rotation = initialPosition.rotation;
-        }
+        } 
+        // else if (sceneMovementData.GetSceneType() == SceneMovementData.SceneType.DungeonToBattle) {
+        //     var initialPosition = GameObject.Find("BattlePosition").transform;
+        //     transform.position = initialPosition.position;
+        //     transform.rotation = initialPosition.rotation;
+        // }
     }
 }

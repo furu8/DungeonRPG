@@ -50,6 +50,8 @@ public class LoadSceneManager : MonoBehaviour
             yield return StartCoroutine(LoadScene("OrarioMap"));
         } else if (scene == SceneMovementData.SceneType.OrarioToDungeon) {
             yield return StartCoroutine(LoadScene("DungeonMap18"));
+        } else if (scene == SceneMovementData.SceneType.DungeonToBattle) {
+            yield return StartCoroutine(LoadScene("Battle"));
         }
  
         //　フェードUIのインスタンス化

@@ -12,7 +12,8 @@ public class SceneMovementData : ScriptableObject
     public enum SceneType {
         StartGame,
         Orario,
-        OrarioToDungeon
+        OrarioToDungeon,
+        DungeonToBattle
     }
     [SerializeField]
     private SceneType sceneType;

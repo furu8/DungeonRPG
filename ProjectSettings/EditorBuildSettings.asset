@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DungeonRPG/Scenes/DungeonMap18.unity
     guid: b7df0ffde16897f49b412ea75f7eed4c
+  - enabled: 1
+    path: Assets/DungeonRPG/Scenes/Battle.unity
+    guid: ddc9039eaacdf414d8e594f4f4cce225
   m_configObjects: {}
