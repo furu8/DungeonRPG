@@ -15,11 +15,18 @@ public class GoToOtherScene : MonoBehaviour
         sceneManager = FindObjectOfType<LoadSceneManager>();
     }
  
+    // 場所遷移用
     private void OnTriggerEnter(Collider col) {
         //　次のシーンへ遷移途中でない時
         if (col.tag == "Player" && !isTransition) {
             isTransition = true;
             sceneManager.GoToNextScene(scene);
         }    
+    }
+    
+    // 戦闘シーン遷移用
+    void OnCollisionEnter(Collision collision)
+    {
+        sceneManager.GoToNextScene(scene);
     }
 }
