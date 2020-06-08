@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
  
-public class IdleCommandScript : MonoBehaviour {
+public class IdleCommandController : MonoBehaviour {
     //　パーティーステータス
     [SerializeField]
     private PartyStatus partyStatus = null;
@@ -35,21 +35,14 @@ public class IdleCommandScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //　シーン遷移途中とユニティちゃんの状態によっては表示しない
-        if (sceneManager.IsTransition()
-            || player.GetState() == PlayerController.State.Talk 
-            || player.GetState() == PlayerController.State.Command
-            ) {
+        if (sceneManager.IsTransition() || player.GetState() == PlayerController.State.Talk || player.GetState() == PlayerController.State.Command) {
             elapsedTime = 0f;
             characterStatusPanel.SetActive(false);
             return;
         }
  
         //　何らかのキーが押された時
-        if (Input.anyKeyDown
-        || !Mathf.Approximately(Input.GetAxis("Horizontal"), 0f)
-        || !Mathf.Approximately(Input.GetAxis("Vertical"), 0f)
-        ) {
- 
+        if (Input.anyKeyDown || !Mathf.Approximately(Input.GetAxis("Horizontal"), 0f) || !Mathf.Approximately(Input.GetAxis("Vertical"), 0f)) {
             elapsedTime = 0f;
             //　キャラクターステータスパネルの子要素があれば削除する
             for (int i = characterStatusPanel.transform.childCount - 1; i >= 0; i--) {
@@ -64,7 +57,7 @@ public class IdleCommandScript : MonoBehaviour {
             if (elapsedTime >= idleTime) {
                 GameObject characterPanel;
                 //　パーティーメンバー分のステータスを作成
-                foreach (var member in partyStatus.GetPartyStatus()) {
+                foreach (var member in partyStatus.GetAllyStatus()) {
                     characterPanel = Instantiate<GameObject>(characterPanelPrefab, characterStatusPanel.transform);
                     characterPanel.transform.Find("CharacterName").GetComponent<Text>().text = member.GetCharacterName();
                     characterPanel.transform.Find("HPSlider").GetComponent<Slider>().value = (float)member.GetHp() / member.GetMaxHp();

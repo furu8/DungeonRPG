@@ -92,7 +92,9 @@ public class PlayerController : MonoBehaviour
         } else if (state == State.Talk) {
             // 何もしない
 
-        } 
+        } else if (state == State.Command) {
+
+        }
         // else if (state == State.Wait) {
         //     // 会話相手が見つかったときに、マウス左クリックをしたら会話状態に遷移
         //     if (playerTalkDirector.GetConversationPartner() != null && Input.GetButtonDown("Action")) {
@@ -131,7 +133,14 @@ public class PlayerController : MonoBehaviour
             velocity = Vector3.zero;
             animator.SetFloat("Speed", 0f);
             playerTalkDirector.StartTalking();
-        }
+        } else if(state == State.Command) {
+            velocity = Vector3.zero;
+            animator.SetFloat("Speed", 0f);
+        } 
+        // else if (state == State.Wait) {
+        //     velocity = Vector3.zero;
+        //     animator.SetFloat("Speed", 0f);
+        // }
     }
     // 状態を取得
     public State GetState() {
