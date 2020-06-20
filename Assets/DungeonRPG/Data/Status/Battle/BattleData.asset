@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ba31023c6cf8446a4d858f54449f29, type: 3}
-  m_Name: BattlePartyStatus
+  m_Script: {fileID: 11500000, guid: 671d5ef0f286de949b12b35d440a085a, type: 3}
+  m_Name: BattleData
   m_EditorClassIdentifier: 
-  partyMembers:
-  - {fileID: 8395340435868368241, guid: ec71b52bd4e921e4494aab5a240aff3b, type: 3}
-  - {fileID: 2706721072630724005, guid: 5f2d10e17937ff04a820e51f67ccfa8b, type: 3}
+  battlePartyStatus: {fileID: 11400000, guid: 4ff9a68809850b34db3376d147921997, type: 2}

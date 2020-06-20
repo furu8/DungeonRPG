@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52c2a314f058ec44d8a5d8aa9ffaddc6, type: 3}
-  m_Name: MonsterStatus
+  m_Name: Monsters1
   m_EditorClassIdentifier: 
-  partyName: Monsters
+  partyName: Monsters1
   partyMembers:
   - {fileID: 5420386332440613830, guid: 9d0b811dc2700764ca9aee18ddfe9f4a, type: 3}
   - {fileID: 4579550764910790042, guid: fe7e86f03ecbe0f4995fc0bdcac319e1, type: 3}
