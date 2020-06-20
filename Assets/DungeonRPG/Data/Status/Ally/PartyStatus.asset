@@ -15,4 +15,4 @@ MonoBehaviour:
   money: 0
   partyMembers:
   - {fileID: 11400000, guid: 7feb2ce8132e05d4a9295ee47c9e6b93, type: 2}
-  - {fileID: 11400000, guid: 47e52287fc747dd49b2f2a63fb7448ac, type: 2}
+  - {fileID: 11400000, guid: a73b74b39fa76c842a7dea5522ae3cdf, type: 2}

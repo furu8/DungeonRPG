@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BattlePartyStatus
   m_EditorClassIdentifier: 
   partyMembers:
-  - {fileID: 8395340435868368241, guid: ec71b52bd4e921e4494aab5a240aff3b, type: 3}
+  - {fileID: 8395340435868368241, guid: ce29f1d0ed2b68446b4631a62d7aba74, type: 3}
   - {fileID: 2706721072630724005, guid: 5f2d10e17937ff04a820e51f67ccfa8b, type: 3}

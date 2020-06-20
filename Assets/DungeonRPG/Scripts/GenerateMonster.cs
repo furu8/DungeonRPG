@@ -50,6 +50,6 @@ public class GenerateMonster : MonoBehaviour {
 			}
 		}
 		//　どれだけの敵が配置されたか確認
-		Debug.Log(parentObj.transform.childCount);
+		// Debug.Log(parentObj.transform.childCount);
 	}
 }
