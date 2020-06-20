@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671d5ef0f286de949b12b35d440a085a, type: 3}
   m_Name: BattleData
   m_EditorClassIdentifier: 
-  battlePartyStatus: {fileID: 11400000, guid: 4ff9a68809850b34db3376d147921997, type: 2}
+  battlePartyStatus: {fileID: 0}
+  monsterPartyStatus: {fileID: 0}

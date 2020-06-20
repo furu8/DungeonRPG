@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: MonsterPartyStatusList
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPartyStatusList
-  partyMembersList:
-  - {fileID: 11400000, guid: e117b33e4dc7c1f45b31fff75b090796, type: 2}
-  - {fileID: 11400000, guid: e117b33e4dc7c1f45b31fff75b090796, type: 2}
+  partyMembersList: []

@@ -11,7 +11,8 @@ public class BattleData : ScriptableObject
     [SerializeField]
     private BattlePartyStatus battlePartyStatus;
     //　敵パーティーデータ
-    private MonsterPartyStatus enemyPartyStatus;
+    [SerializeField]
+    private MonsterPartyStatus monsterPartyStatus;
  
     public void SetAllyPartyStatus(BattlePartyStatus partyStatus) {
         battlePartyStatus = partyStatus;
@@ -21,11 +22,11 @@ public class BattleData : ScriptableObject
         return battlePartyStatus;
     }
  
-    public void SetEnemyPartyStatus(MonsterPartyStatus enemyPartyStatus) {
-        this.enemyPartyStatus = enemyPartyStatus;
+    public void SetMonsterPartyStatus(MonsterPartyStatus monsterPartyStatus) {
+        this.monsterPartyStatus = monsterPartyStatus;
     }
  
-    public MonsterPartyStatus GetEnemyPartyStatus() {
-        return enemyPartyStatus;
+    public MonsterPartyStatus GetMonsterPartyStatus() {
+        return monsterPartyStatus;
     }
 }
